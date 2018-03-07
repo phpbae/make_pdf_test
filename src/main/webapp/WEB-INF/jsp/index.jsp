@@ -23,7 +23,7 @@
 
             $("#down-pdf").on('click', function () {
                 console.log('버튼 클릭');
-                window.location = '/test';
+                window.location = '/downPDF';
             });
 
         });
