@@ -1,8 +1,6 @@
 package com.example.demo.component;
 
 import be.quodlibet.boxable.BaseTable;
-import be.quodlibet.boxable.Cell;
-import be.quodlibet.boxable.Row;
 import be.quodlibet.boxable.datatable.DataTable;
 import com.example.demo.domain.Member;
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -14,7 +12,6 @@ import org.apache.pdfbox.pdmodel.font.PDType0Font;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.springframework.stereotype.Component;
 
-import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -37,6 +34,13 @@ public class PdfFileMakerComponent {
         pdPage = new PDPage(PDRectangle.A4);
         document.addPage(pdPage);
         pdPage.setMediaBox(new PDRectangle(PDRectangle.A4.getHeight(), PDRectangle.A4.getWidth()));
+        hangulFont = PDType0Font.load(document, new File("c:/Windows/Fonts/malgun.TTF"));
+    }
+
+    private void initPDFTest() throws IOException {
+        document = new PDDocument();
+        pdPage = new PDPage(PDRectangle.A4);
+        document.addPage(pdPage);
         hangulFont = PDType0Font.load(document, new File("c:/Windows/Fonts/malgun.TTF"));
     }
 
@@ -77,7 +81,7 @@ public class PdfFileMakerComponent {
         File pdfFile = new File("test.pdf");
 
         try {
-            initPDF();
+            initPDFTest();
             contentStream = new PDPageContentStream(document, pdPage);
 
             contentStream.setLeading(10 * 1.2);
