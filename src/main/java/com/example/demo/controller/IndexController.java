@@ -45,7 +45,7 @@ public class IndexController {
         return new ModelAndView("index");
     }
 
-    @RequestMapping(value = "/test", method = RequestMethod.GET)
+    @RequestMapping(value = "/downPDF", method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<Resource> test() {
 
@@ -74,11 +74,11 @@ public class IndexController {
                 .body(resource);
     }
 
-    @RequestMapping(value = "test2", method = RequestMethod.GET)
+    @RequestMapping(value = "/downPDFs", method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<Resource> test2() {
         List<Member> memberList = memberService.getMembers();
-        List<List<Member>> lists = Lists.partition(memberList, 100);
+        List<List<Member>> lists = Lists.partition(memberList, 100); // guava 라이브러리에서 제공해주는 partition 메서드를 통해, list를 갯수만큼 분할.
 
         List<File> files = lists.stream()
                 .map(membersList -> pdfFileMakerComponent.executeCreatePDF(membersList))
